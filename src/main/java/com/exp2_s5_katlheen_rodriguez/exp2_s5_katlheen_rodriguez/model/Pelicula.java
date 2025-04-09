@@ -1,10 +1,17 @@
 package com.exp2_s5_katlheen_rodriguez.exp2_s5_katlheen_rodriguez.model;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonPropertyOrder;
+
 import jakarta.persistence.*;
 
 @Entity
 @Table(name = "pelicula")
+//Orden de salida en json
+@JsonPropertyOrder({ "id", "titulo", "año", "director", "genero", "sinopsis"})
 public class Pelicula {
+
+    //Atributos con su respectivo detalle para la construccion de columnas
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
@@ -13,6 +20,7 @@ public class Pelicula {
     @Column(nullable = false, length = 150, name = "titulo")
     private String titulo;
 
+    @JsonProperty("año") //Cambiar nombre a "año" en el JSON
     @Column(name = "anio", nullable = false)
     private int anio;
 
@@ -25,7 +33,7 @@ public class Pelicula {
     @Column(nullable = false, name = "sinopsis")
     private String sinopsis;
 
-    // Constructores
+    //Constructores
     public Pelicula() {
     }
 
@@ -37,7 +45,7 @@ public class Pelicula {
         this.sinopsis = sinopsis;
     }
 
-    // Getters y Setters
+    //Getters y Setters
     public Long getId() {
         return id;
     }
